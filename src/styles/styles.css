@@ -1,0 +1,19 @@
+/* Global styles */
+.ant-card {
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.33);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.33);
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.33);
+}
+
+.ant-badge .ant-badge-count {
+  border-radius: 6px;
+  font-size: 1.5em;
+  font-weight: bold;
+  height: 22px;
+  padding: 0 6px;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
