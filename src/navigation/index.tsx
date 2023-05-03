@@ -1,6 +1,6 @@
-import { Spin } from "antd";
 import React, { Suspense } from "react";
 import { Route, Routes } from 'react-router-dom';
+import PageChunkLoader from "../components/PageChunkLoader";
 
 const AppLayout = React.lazy(() => import('../pages/AppLayout'));
 const TopPodcasts = React.lazy(() => import('../pages/TopPodcasts'));
@@ -11,7 +11,7 @@ const NotFound = React.lazy(() => import('../pages/NotFound'));
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<Spin />}>
+    <Suspense fallback={<PageChunkLoader />}>
       <Routes>
         <Route path="/*" element={<AppLayout />}>
           <Route index element={<TopPodcasts />} />

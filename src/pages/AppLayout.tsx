@@ -23,7 +23,7 @@ const AppLayout = () => {
         </Title>
         {isLoading && <Spin />}
       </Header>
-      <Content style={{ padding: 16 }}>
+      <Content>
         <Outlet />
       </Content>
     </Layout>
