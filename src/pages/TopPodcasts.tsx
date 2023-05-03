@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import IPodcast from "../models/IPodcast";
-import { Col, Row } from "antd";
-import PodcastCard from "../components/PodcastCard";
 import useTopPodcasts from "../hooks/useTopPodcasts";
 import { useAppSettings } from "../contexts/AppSettings";
 import PodcastFilterer from "../components/PodcastFilterer";
+import PodcastGrid from "../components/PodcastGrid";
 
-const Main = () => {
-  const { isLoading } = useAppSettings();
-
+const TopPodcasts = () => {
   const { topPodcasts } = useTopPodcasts();
   const [filteredPodcasts, setFilteredPodcasts] = useState<IPodcast[]>();
 
@@ -31,17 +28,9 @@ const Main = () => {
   return (
     <>
       <PodcastFilterer badgeCount={filteredPodcasts?.length} onSearchChange={onSearchChange} />
-      {!isLoading && <Row gutter={[32, 64]}>
-        {filteredPodcasts?.map((podcast) => {
-          return (
-            <Col key={podcast.id} span={6}>
-              <PodcastCard podcast={podcast} />
-            </Col>
-          );
-        })}
-      </Row>}
+      <PodcastGrid podcasts={filteredPodcasts}/>
     </>
   );
 };
 
-export default Main;
+export default TopPodcasts;

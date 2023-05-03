@@ -18,7 +18,7 @@ const PodcastFilterer: React.FC<IPodcastFiltererProps> = ({ badgeCount, onSearch
 
     return (
         <Row justify="end" align="middle">
-            <Badge color="blue" count={badgeCount} overflowCount={999}/>
+            {!isLoading && <Badge color="blue" count={badgeCount} overflowCount={999}/>}
             <Input
                 placeholder="Filter podcasts..."
                 style={{ maxWidth: '400px', marginLeft: 16 }}
