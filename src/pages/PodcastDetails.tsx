@@ -21,11 +21,11 @@ const PodcastDetails = () => {
     <Row gutter={32}>
       <Col span={8}>
         <Card style={{ marginRight: 48 }} loading={isLoading}>
-          <Image className="clickable" src={image} preview={false} width="100%" onClick={() => navigateToPodcast()} />
+          <Image className="clickable" src={image} preview={false} width="100%" onClick={navigateToPodcast} />
           <Divider />
           <Space direction="vertical" size={0}>
-            <Text className="clickable" strong onClick={() => navigateToPodcast()}>{title}</Text>
-            <Text italic>by {author}</Text>
+            <Text className="clickable" strong onClick={navigateToPodcast}>{title}</Text>
+            <Text className="clickable" italic onClick={navigateToPodcast}>by {author}</Text>
           </Space>
           <Divider />
           <Text strong>Description:</Text>
