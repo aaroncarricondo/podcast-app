@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Row, Space, Typography, Image } from "antd";
+import { Card, Col, Divider, Row, Space, Typography } from "antd";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useAppSettings } from "../contexts/AppSettings";
 import useTopPodcasts from "../hooks/useTopPodcasts";
@@ -21,7 +21,9 @@ const PodcastDetails = () => {
     <Row gutter={32}>
       <Col span={8}>
         <Card style={{ marginRight: 48 }} loading={isLoading}>
-          <Image className="clickable" src={image} preview={false} width="100%" onClick={navigateToPodcast} />
+          <div style={{ padding: '0 24px' }}>
+            <img className="clickable" width="100%" src={image} onClick={navigateToPodcast} />
+          </div>
           <Divider />
           <Space direction="vertical" size={0}>
             <Text className="clickable" strong onClick={navigateToPodcast}>{title}</Text>

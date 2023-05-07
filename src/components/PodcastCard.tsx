@@ -1,4 +1,4 @@
-import { Avatar, Card, Space, Typography } from "antd";
+import { Card, Space, Typography } from "antd";
 import IPodcast from "../models/IPodcast";
 import { useNavigate } from "react-router-dom";
 import '../styles/podcastCard.css';
