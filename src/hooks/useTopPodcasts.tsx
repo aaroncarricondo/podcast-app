@@ -3,7 +3,7 @@ import IPodcast from "../models/IPodcast";
 import IRawPodcast from "../models/IRawPodcast";
 import { useAppSettings } from "../contexts/AppSettings";
 import IStoredData from "../models/IStoredData";
-import { checkDataOutdated } from "../utils/storedDataUtils";
+import { getStoredData } from "../utils/storedDataUtils";
 
 const topPodcastsKey = 'topPodcasts';
 
@@ -12,20 +12,10 @@ const useTopPodcasts = () => {
 
   const [topPodcasts, setTopPodcasts] = useState<IPodcast[]>();
 
-  const getStoredData = () => {
-    const storedData = localStorage.getItem(topPodcastsKey);
-    const parsedStoredData: IStoredData<IPodcast[]> = storedData ? JSON.parse(storedData) : undefined;
-
-    return parsedStoredData;
-  };
-
   useEffect(() => {
-    const storedData = getStoredData();
-    const isDataOutdated = checkDataOutdated(storedData);
+    const { isDataOutdated, storedData } = getStoredData<IPodcast[]>(topPodcastsKey);
     if (isDataOutdated) fetchPodcasts();
-    else {
-      setTopPodcasts(storedData.data);
-    }
+    else setTopPodcasts(storedData.data);
 
     return () => {
       removeOperation(topPodcastsKey);

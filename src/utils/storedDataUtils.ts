@@ -1,6 +1,6 @@
 import IStoredData from "../models/IStoredData";
 
-export const checkDataOutdated = (storedData: IStoredData) => {
+const checkDataOutdated = (storedData: IStoredData) => {
   if (!storedData) return true;
   const todayDate = new Date();
 
@@ -13,4 +13,11 @@ export const checkDataOutdated = (storedData: IStoredData) => {
   }
 
   return false;
+};
+
+export const getStoredData = <T = any>(localStorageKey: string) => {
+  const storedData = localStorage.getItem(localStorageKey);
+  const parsedStoredData: IStoredData<T> = storedData ? JSON.parse(storedData) : undefined;
+
+  return { isDataOutdated: checkDataOutdated(parsedStoredData), storedData: parsedStoredData };
 };

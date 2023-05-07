@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppSettings } from "../contexts/AppSettings";
 import IStoredData from "../models/IStoredData";
 import IRawPodcastData from "../models/IRawPodcastData";
-import { checkDataOutdated } from "../utils/storedDataUtils";
+import { getStoredData } from "../utils/storedDataUtils";
 
 const usePodcastEpisodes = (id: string) => {
   const { addOperation, removeOperation } = useAppSettings();
@@ -13,13 +13,6 @@ const usePodcastEpisodes = (id: string) => {
 
   const podcastDetailsKey = `podcastDetails-${id}`;
 
-  const getStoredData = () => {
-    const storedData = localStorage.getItem(podcastDetailsKey);
-    const parsedStoredData: IStoredData<IRawPodcastData> = storedData ? JSON.parse(storedData) : undefined;
-
-    return parsedStoredData;
-  };
-
   useEffect(() => {
     return () => {
       removeOperation(podcastDetailsKey);
@@ -28,12 +21,9 @@ const usePodcastEpisodes = (id: string) => {
 
   useEffect(() => {
     if (id) {
-      const storedData = getStoredData();
-      const isDataOutdated = checkDataOutdated(storedData);
+      const { isDataOutdated, storedData } = getStoredData<IRawPodcastData>(podcastDetailsKey);
       if (isDataOutdated) fetchPodcasts();
-      else {
-        setPodcastData(storedData.data);
-      }
+      else setPodcastData(storedData.data);
     }
   }, [id]);
 
