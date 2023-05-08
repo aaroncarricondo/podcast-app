@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSettings } from "../contexts/AppSettings";
-import IStoredData from "../models/IStoredData";
 import IRawPodcastData from "../models/IRawPodcastData";
-import { getStoredData } from "../utils/storedDataUtils";
+import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 
 const usePodcastEpisodes = (id: string) => {
   const { addOperation, removeOperation } = useAppSettings();
@@ -36,11 +35,7 @@ const usePodcastEpisodes = (id: string) => {
 
       const parsedData = JSON.parse(data.contents);
       setPodcastData(parsedData);
-      const dataToStore: IStoredData<IRawPodcastData> = {
-        data: parsedData,
-        date: new Date(),
-      };
-      localStorage.setItem(podcastDetailsKey, JSON.stringify(dataToStore));
+      setStoredData(podcastDetailsKey, parsedData);
     } catch (error) {
       console.error(error);
     } finally {

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import IPodcast from "../models/IPodcast";
 import IRawPodcast from "../models/IRawPodcast";
 import { useAppSettings } from "../contexts/AppSettings";
-import IStoredData from "../models/IStoredData";
-import { getStoredData } from "../utils/storedDataUtils";
+import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 
 const topPodcastsKey = 'topPodcasts';
 
@@ -39,11 +38,7 @@ const useTopPodcasts = () => {
       });
 
       setTopPodcasts(parsedPodcasts);
-      const dataToStore: IStoredData<IPodcast[]> = {
-        data: parsedPodcasts,
-        date: new Date(),
-      };
-      localStorage.setItem(topPodcastsKey, JSON.stringify(dataToStore));
+      setStoredData(topPodcastsKey, parsedPodcasts);
     } catch (error) {
       console.error(error);
     } finally {

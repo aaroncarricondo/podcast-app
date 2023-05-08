@@ -21,3 +21,11 @@ export const getStoredData = <T = any>(localStorageKey: string) => {
 
   return { isDataOutdated: checkDataOutdated(parsedStoredData), storedData: parsedStoredData };
 };
+
+export const setStoredData = <T = any>(localStorageKey: string, data: T) => {
+  const dataToStore: IStoredData<T> = {
+    data,
+    date: new Date(),
+  };
+  localStorage.setItem(localStorageKey, JSON.stringify(dataToStore));
+};
