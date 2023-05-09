@@ -8,8 +8,6 @@ interface IPodcastTrack {
 
   // Audio
   episodeUrl: string;
-  episodeContentType: string;
-  episodeFileExtension: string;
 }
 
 export default IPodcastTrack;

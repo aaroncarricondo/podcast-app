@@ -17,7 +17,7 @@ const PageChunkLoader = () => {
     }, []);
 
     return (
-        <Spin className="page-chunk-loader-spin" size="large" />
+        <Spin data-testid="page-chunk-loader-spin" className="page-chunk-loader-spin" size="large" />
     );
 };
 

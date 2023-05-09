@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useReducer, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 export interface AppSettingsData {
   isLoading: boolean;
@@ -21,23 +21,23 @@ interface AppSettingsProviderProps {
 }
 
 export const AppSettingsProvider = ({ children }: AppSettingsProviderProps) => {
-  const [fetchOperations, setFetchOperations] = useState<string[]>([]);
+  const [loadingOperations, setLoadingOperations] = useState<string[]>([]);
 
   const addOperation = (operationName: string) => {
-    setFetchOperations((prev) => [...prev, operationName]);
+    setLoadingOperations((prev) => [...prev, operationName]);
   };
 
   const removeOperation = (operationName: string) => {
-    setFetchOperations((prev) => prev.filter((op) => op !== operationName));
+    setLoadingOperations((prev) => prev.filter((op) => op !== operationName));
   };
 
   const value = useMemo(() => {
     return {
-      isLoading: fetchOperations.length !== 0,
+      isLoading: loadingOperations.length !== 0,
       addOperation,
       removeOperation,
     }
-  }, [fetchOperations]);
+  }, [loadingOperations]);
 
   return <AppSettingsContext.Provider value={value}>{children}</AppSettingsContext.Provider>;
 };

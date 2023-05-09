@@ -3,7 +3,18 @@
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom/extend-expect"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|less)$": "identity-obj-proxy"
+  },
   "collectCoverageFrom": [
     "./src/**"
-  ]
+  ],
+  "coverageThreshold": {
+    "global": {
+      "lines": 20
+    }
+  }
 }
