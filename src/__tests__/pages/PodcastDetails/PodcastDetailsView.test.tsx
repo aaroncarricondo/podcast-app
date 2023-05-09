@@ -36,7 +36,7 @@ describe('Podcast details view', () => {
     render(<PodcastDetailsView podcast={mockedPodcast} />);
 
     expect(screen.queryByText(mockedPodcast.title)).toBeTruthy();
-    expect(screen.queryByText(`by mockedPodcast.author`)).toBeTruthy();
+    expect(screen.queryByText(`by ${mockedPodcast.author}`)).toBeTruthy();
     expect(screen.queryByText(mockedPodcast.summary)).toBeTruthy();
   });
 });
