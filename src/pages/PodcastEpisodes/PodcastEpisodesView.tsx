@@ -1,19 +1,20 @@
-import { Button, Card, Table, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
+import IPodcastTrack from "../../models/IPodcastTrack";
 import { ColumnsType } from "antd/lib/table";
-import { useNavigate, useParams } from "react-router-dom";
-import usePodcastEpisodes from "../hooks/usePodcastEpisodes";
-import { useAppSettings } from "../contexts/AppSettings";
-import IPodcastTrack from "../models/IPodcastTrack";
-import { millisToMinutesAndSeconds } from "../utils/timeUtils";
+import { Button, Card, Table, Typography } from "antd";
+import { millisToMinutesAndSeconds } from "../../utils/timeUtils";
+import { useAppSettings } from "../../contexts/AppSettings";
 
 const { Title } = Typography;
 
-const PodcastEpisodes = () => {
-  const { isLoading } = useAppSettings();
+interface IPodcastEpisodesViewProps {
+  trackCount: number;
+  episodes: IPodcastTrack[];
+}
 
-  const { podcastId } = useParams();
+const PodcastEpisodesView: React.FC<IPodcastEpisodesViewProps> = ({ trackCount, episodes }: IPodcastEpisodesViewProps) => {
+  const { isLoading } = useAppSettings();
   const navigate = useNavigate();
-  const { episodes, trackCount } = usePodcastEpisodes(podcastId);
 
   const columns: ColumnsType<IPodcastTrack> = [
     {
@@ -48,4 +49,4 @@ const PodcastEpisodes = () => {
   );
 };
 
-export default PodcastEpisodes;
+export default PodcastEpisodesView;

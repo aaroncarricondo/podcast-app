@@ -1,6 +1,8 @@
 # Podcast app
+iTunes top podcast application, consuming the public API.
 
-In order to execute the application locally, ***serve*** (npm package) should be installed.
+[![codecov](https://codecov.io/github/aaroncarricondo/podcast-app/branch/master/graph/badge.svg?token=IR3Y1MHY0W)](https://codecov.io/github/aaroncarricondo/podcast-app)
+
 
 ## Installation
 
@@ -34,11 +36,13 @@ npm run build
 npx serve dist
 ```
 
+***Notes***: In order to execute the application locally, ***serve*** (npm package) should be installed.
+
 ## Folder structure
 
 ### /components
 
-Shared components used in the application that are not entrypoints of pages.
+Shared components used in multiple pages or components that are not entry points of pages.
 
 ### /contexts
 
@@ -54,11 +58,11 @@ Interfaces defined for remote data.
 
 ### /navigation
 
-All the navigation and routes defined for the application. "index.tsx" is the main entrypoint, but it could be separated into different files if the navigation grows.
+All the navigation and routes defined for the application. "index.tsx" is the main entry point, but it could be separated into different files if the navigation grows.
 
 ### /pages
 
-React components that are navigation entrypoints, normally without properties.
+React components that are navigation entry points, normally without properties.
 
 ### /styles
 
@@ -67,6 +71,20 @@ All the styling files, in this case css.
 ### /utils
 
 Pure javascript functions that are used across the aplication.
+
+## Container-View pattern
+
+The components inside pages will be developed following de Container-View pattern.
+
+- **Container components**: Entry point of the page/feature.
+  - Data fetching.
+  - Computations.
+  - Pass the data to the View.
+  - No styling (css, less, scss, etc.)
+- **View components**:
+  - All the user interface is defined here.
+  - All the data/callbacks must be received from props provided by its container or parent.
+  - Can be broken down in diferent components if it grows, following the view-container pattern or if its just user interface, defined as a normal component.
 
 
 ## Main packages
@@ -82,3 +100,6 @@ Pure javascript functions that are used across the aplication.
 4.  Ant Design:
     - Lots of already developed components.
     - Typed components.
+5. Jest:
+  - Testing JS/TS code.
+  - Code coverage.

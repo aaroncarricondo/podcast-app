@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import IPodcast from "../models/IPodcast";
-import useTopPodcasts from "../hooks/useTopPodcasts";
-import { useAppSettings } from "../contexts/AppSettings";
-import PodcastFilterer from "../components/PodcastFilterer";
-import PodcastGrid from "../components/PodcastGrid";
+import IPodcast from "../../models/IPodcast";
+import useTopPodcasts from "../../hooks/useTopPodcasts";
+import TopPodcastsView from "./TopPodcastsView";
 
-const TopPodcasts = () => {
+const TopPodcastsContainer = () => {
   const { topPodcasts } = useTopPodcasts();
   const [filteredPodcasts, setFilteredPodcasts] = useState<IPodcast[]>();
 
@@ -25,12 +23,7 @@ const TopPodcasts = () => {
     else setFilteredPodcasts(topPodcasts);
   };
 
-  return (
-    <>
-      <PodcastFilterer badgeCount={filteredPodcasts?.length} onSearchChange={onSearchChange} />
-      <PodcastGrid podcasts={filteredPodcasts}/>
-    </>
-  );
+  return <TopPodcastsView podcasts={filteredPodcasts} onSearchChange={onSearchChange} />;
 };
 
-export default TopPodcasts;
+export default TopPodcastsContainer;

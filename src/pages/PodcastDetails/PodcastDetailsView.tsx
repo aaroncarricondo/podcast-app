@@ -1,21 +1,21 @@
-import { Card, Col, Divider, Row, Space, Typography } from "antd";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useAppSettings } from "../contexts/AppSettings";
-import useTopPodcasts from "../hooks/useTopPodcasts";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useAppSettings } from "../../contexts/AppSettings";
+import IPodcast from "../../models/IPodcast";
+import { Row, Col, Card, Divider, Space, Typography } from "antd";
 
 const { Text } = Typography;
 
-const PodcastDetails = () => {
-  const { podcastId } = useParams();
+interface IPodcastDetailsViewProps {
+  podcast: IPodcast;
+}
+
+const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPodcastDetailsViewProps) => {
   const { isLoading } = useAppSettings();
-
-  const { getPodcastById } = useTopPodcasts();
-  const podcast = getPodcastById(podcastId);
-  const { image, title, author, summary } = podcast || {};
-
   const navigate = useNavigate();
 
-  const navigateToPodcast = () => navigate(`/podcast/${podcastId}`);
+  const { id, image, title, author, summary } = podcast || {};
+
+  const navigateToPodcast = () => navigate(`/podcast/${id}`);
 
   return (
     <Row gutter={32}>
@@ -42,4 +42,4 @@ const PodcastDetails = () => {
   );
 };
 
-export default PodcastDetails;
+export default PodcastDetailsView;

@@ -1,7 +1,7 @@
 import { Card, Space, Typography } from "antd";
-import IPodcast from "../models/IPodcast";
+import IPodcast from "../../../models/IPodcast";
 import { useNavigate } from "react-router-dom";
-import '../styles/podcastCard.css';
+import '../../../styles/podcastCard.css';
 
 const { Text } = Typography;
 
