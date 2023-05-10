@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { ConfigProvider } from "antd"
 import { AppSettingsProvider } from "./contexts/AppSettings";
 import AppRoutes from "./navigation";

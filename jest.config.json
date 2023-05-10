@@ -4,7 +4,7 @@
     "^.+\\.tsx?$": "ts-jest"
   },
   "setupFilesAfterEnv": [
-    "@testing-library/jest-dom/extend-expect"
+    "<rootDir>/jest.setup.ts"
   ],
   "moduleNameMapper": {
     "\\.(css|less)$": "identity-obj-proxy"
@@ -14,7 +14,7 @@
   ],
   "coverageThreshold": {
     "global": {
-      "lines": 20
+      "lines": 35
     }
   }
 }
