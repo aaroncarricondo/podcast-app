@@ -1,16 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import IPodcast from '../../../models/IPodcast';
 import PodcastDetailsContainer from '../../../pages/PodcastDetails';
 import * as useTopPodcasts from '../../../hooks/useTopPodcasts';
-
-const mockedPodcast: IPodcast = {
-  id: '1',
-  title: 'Mocked podcast',
-  author: 'Mocked author',
-  summary: 'Mocked summary',
-  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/GitHub_logo_2013.svg/480px-GitHub_logo_2013.svg.png'
-};
+import { mockedPodcast } from '../../data/podcastsData';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as any,

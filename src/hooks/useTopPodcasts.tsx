@@ -4,7 +4,7 @@ import IRawPodcast from "../models/IRawPodcast";
 import { useAppSettings } from "../contexts/AppSettings";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 
-const topPodcastsKey = 'topPodcasts';
+export const topPodcastsKey = 'topPodcasts';
 
 const useTopPodcasts = () => {
   const { addOperation, removeOperation } = useAppSettings();

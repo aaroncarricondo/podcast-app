@@ -1,5 +1,8 @@
 {
   "testEnvironment": "jsdom",
+  "testMatch": [
+    "**/*.test.(ts|tsx)"
+  ],
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
   },
@@ -12,9 +15,13 @@
   "collectCoverageFrom": [
     "./src/**"
   ],
+  "coveragePathIgnorePatterns": [
+    "./src/__tests__/*",
+    "./src/navigation/*"
+  ],
   "coverageThreshold": {
     "global": {
-      "lines": 35
+      "lines": 80
     }
   }
 }

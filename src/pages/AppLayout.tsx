@@ -1,11 +1,10 @@
 import { Layout, Spin, Typography, theme } from "antd";
-import { Content } from "antd/es/layout/layout";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAppSettings } from "../contexts/AppSettings";
 
 import '../styles/appLayout.css';
 
-const { Header } = Layout;
+const { Header, Content } = Layout;
 const { Title } = Typography;
 const { useToken } = theme;
 
@@ -21,7 +20,7 @@ const AppLayout = () => {
         <Title className="clickable" level={3} color="blue" style={{ margin: 0, color: token.colorPrimary }} onClick={() => navigate('/')}>
           Podcaster
         </Title>
-        {isLoading && <Spin />}
+        {isLoading && <Spin data-testid="loading-layout-spin" />}
       </Header>
       <Content>
         <Outlet />

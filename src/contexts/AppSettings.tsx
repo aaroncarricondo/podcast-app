@@ -1,18 +1,18 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-export interface AppSettingsData {
+interface AppSettingsData {
   isLoading: boolean;
   addOperation: (operationName: string) => void;
   removeOperation: (operationName: string) => void;
 }
 
-export const appSettingsDefaultValue: AppSettingsData = {
+const appSettingsDefaultValue: AppSettingsData = {
   isLoading: false,
   addOperation: () => undefined,
   removeOperation: () => undefined,
 };
 
-export const AppSettingsContext = createContext<AppSettingsData>(
+const AppSettingsContext = createContext<AppSettingsData>(
   appSettingsDefaultValue,
 );
 

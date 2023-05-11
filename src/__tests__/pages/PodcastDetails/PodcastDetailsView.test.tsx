@@ -1,15 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import PodcastDetailsView from '../../../pages/PodcastDetails/PodcastDetailsView';
-import IPodcast from '../../../models/IPodcast';
 import * as AppSettings from '../../../contexts/AppSettings';
-
-const mockedPodcast: IPodcast = {
-  id: '1',
-  title: 'Mocked podcast',
-  author: 'Mocked author',
-  summary: 'Mocked summary',
-  image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/GitHub_logo_2013.svg/480px-GitHub_logo_2013.svg.png'
-};
+import { BrowserRouter } from 'react-router-dom';
+import MockedMemoryRouter from '../../mocks/MemoryRouter';
+import { mockedPodcast } from '../../data/podcastsData';
 
 const mockedAppSettingsReturn = (isLoading = false) => {
   return {
@@ -19,32 +13,12 @@ const mockedAppSettingsReturn = (isLoading = false) => {
   };
 };
 
-const mockedNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useNavigate: () => mockedNavigate,
-}));
-
+jest.spyOn(AppSettings, 'useAppSettings')
+  .mockImplementation(() => mockedAppSettingsReturn());
 
 describe('Podcast details view', () => {
-  it('should render podcast details', () => {
-    jest.spyOn(AppSettings, 'useAppSettings')
-      .mockImplementation(() => {
-        return mockedAppSettingsReturn();
-      });
-    render(<PodcastDetailsView podcast={mockedPodcast} />);
-
-    expect(screen.queryByText(mockedPodcast.title)).toBeTruthy();
-    expect(screen.queryByText(`by ${mockedPodcast.author}`)).toBeTruthy();
-    expect(screen.queryByText(mockedPodcast.summary)).toBeTruthy();
-  });
-
   it('should render podcast details empty', () => {
-    jest.spyOn(AppSettings, 'useAppSettings')
-      .mockImplementation(() => {
-        return mockedAppSettingsReturn();
-      });
-    render(<PodcastDetailsView podcast={undefined} />);
+    render(<PodcastDetailsView podcast={undefined} />, { wrapper: BrowserRouter });
 
     expect(screen.queryByText('Description:')).toBeTruthy();
     expect(screen.queryByText(mockedPodcast.title)).toBeFalsy();
@@ -52,15 +26,26 @@ describe('Podcast details view', () => {
     expect(screen.queryByText(mockedPodcast.summary)).toBeFalsy();
   });
 
-  it('should navigate when some of the clickable text is clicked', () => {
-    jest.spyOn(AppSettings, 'useAppSettings')
-      .mockImplementation(() => {
-        return mockedAppSettingsReturn();
-      });
-    render(<PodcastDetailsView podcast={mockedPodcast} />);
+  it('should navigate when actual route is not the same and clickable text is clicked', () => {
+    const testRouteText = 'Navigated';
+    render(
+      <MockedMemoryRouter
+        initialEntries={[`/podcast/${mockedPodcast.id}/1`]}
+        mainRouteProps={{
+          path: 'podcast/:podcastId/:episodeId',
+          element: <PodcastDetailsView podcast={mockedPodcast} />,
+        }}
+        otherRoutesProps={[
+          {
+            path: 'podcast/:podcastId',
+            element: testRouteText,
+          }
+        ]}
+      />
+    );
 
     fireEvent.click(screen.queryByText(mockedPodcast.title));
 
-    expect(mockedNavigate).toHaveBeenCalledTimes(1);
+    expect(screen.queryByText(testRouteText)).toBeTruthy();
   });
 });

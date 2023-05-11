@@ -1,14 +1,14 @@
-interface IPodcastProperty {
+interface IRawPodcastProperty {
   label: string;
   attributes?: Record<string, string>;
 }
 
 interface IRawPodcast {
-  id: IPodcastProperty;
-  summary: IPodcastProperty;
-  'im:image': IPodcastProperty[];
-  'im:name': IPodcastProperty;
-  'im:artist': IPodcastProperty;
+  id: IRawPodcastProperty;
+  summary: IRawPodcastProperty;
+  'im:image': IRawPodcastProperty[];
+  'im:name': IRawPodcastProperty;
+  'im:artist': IRawPodcastProperty;
 }
 
 export default IRawPodcast;

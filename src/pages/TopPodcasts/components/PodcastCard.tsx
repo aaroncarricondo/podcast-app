@@ -16,12 +16,12 @@ const PodcastCard: React.FC<IPodcastCardProps> = ({ podcast }: IPodcastCardProps
   const onCardClick = () => navigate(`podcast/${id}`);
 
   return (
-    <Card className="podcast-card" hoverable onClick={onCardClick}>
+    <Card data-testid="podcast-card" className="podcast-card" hoverable onClick={onCardClick}>
       <div className="card-image">
         <img src={image} />
       </div>
       <Space direction="vertical" style={{ width: '100%', marginTop: 8 }}>
-        <Text strong>{title.toUpperCase()}</Text>
+        <Text strong>{title?.toUpperCase()}</Text>
         <Text type="secondary">Author: {author}</Text>
       </Space>
     </Card>

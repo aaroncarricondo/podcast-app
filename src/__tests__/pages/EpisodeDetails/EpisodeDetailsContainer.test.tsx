@@ -1,18 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import IPodcast from '../../../models/IPodcast';
 import * as usePodcastEpisodes from '../../../hooks/usePodcastEpisodes';
 import EpisodeDetailsContainer from '../../../pages/EpisodeDetails';
-import IPodcastTrack from '../../../models/IPodcastTrack';
-
-const mockedEpisode: IPodcastTrack = {
-  trackId: 1,
-  trackName: 'Mocked track',
-  description: 'Mocked track description',
-  releaseDate: '',
-  trackTimeMillis: 309000,
-  episodeUrl: 'https://file-examples.com/storage/fe563fce08645a90397f28d/2017/11/file_example_MP3_700KB.mp3',
-};
+import { mockedEpisode } from '../../data/podcastsEpisodesData';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as any,

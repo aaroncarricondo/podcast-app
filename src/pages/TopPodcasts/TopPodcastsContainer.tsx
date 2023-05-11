@@ -12,7 +12,7 @@ const TopPodcastsContainer = () => {
   }, [topPodcasts]);
 
   const filterPodcast = (podcast: IPodcast, value: string) => {
-    const { title, author } = podcast || {};
+    const { title, author } = podcast;
     return title.toLowerCase().includes(value) || author.toLowerCase().includes(value);
   }
 
