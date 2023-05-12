@@ -16,6 +16,10 @@ const mockedFetch = jest.fn(() =>
 window.fetch = mockedFetch as any;
 
 describe('useTopPodcast hook', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should return the data when called and return ', async () => {
     const { result } = renderHook(() => useTopPodcasts());
 
