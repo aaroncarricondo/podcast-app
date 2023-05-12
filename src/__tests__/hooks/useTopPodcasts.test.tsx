@@ -2,18 +2,16 @@ import { renderHook, waitFor } from '@testing-library/react';
 import useTopPodcasts, { topPodcastsKey } from '../../hooks/useTopPodcasts';
 import { getMockedPodcasts, getMockedRawPodcasts } from '../data/podcastsData';
 import { setStoredData } from '../../utils/storedDataUtils';
+import { getMockedFetch } from '../mocks/fetch';
 
 const mockedRawPodcasts = getMockedRawPodcasts();
-const mockedFetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({
-      feed: {
-        entry: mockedRawPodcasts,
-      }
-    }),
-  })
-);
-window.fetch = mockedFetch as any;
+const mockedFetch = getMockedFetch({
+  json: () => Promise.resolve({
+    feed: {
+      entry: mockedRawPodcasts,
+    }
+  }),
+}) as any;
 
 describe('useTopPodcast hook', () => {
   afterEach(() => {
@@ -21,6 +19,7 @@ describe('useTopPodcast hook', () => {
   });
 
   it('should return the data when called and return ', async () => {
+    jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
     const { result } = renderHook(() => useTopPodcasts());
 
     await waitFor(() => {
@@ -31,6 +30,7 @@ describe('useTopPodcast hook', () => {
   });
 
   it('should not call fetch if data is already in localStorage', async () => {
+    jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
     setStoredData(topPodcastsKey, getMockedPodcasts());
 
     const { result } = renderHook(() => useTopPodcasts());
