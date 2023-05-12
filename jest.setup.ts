@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 
+global.fetch = jest.fn();
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({

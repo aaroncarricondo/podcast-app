@@ -3,14 +3,16 @@ import { useAppSettings } from "../contexts/AppSettings";
 import IRawPodcastData from "../models/IRawPodcastData";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 
+export const getPodcastDetailsKey = (id: string) => `podcastDetails-${id}`;
+
 const usePodcastEpisodes = (id: string) => {
   const { addOperation, removeOperation } = useAppSettings();
 
   const [podcastData, setPodcastData] = useState<IRawPodcastData>();
   const { trackCount } = podcastData?.results.at(0) || {};
-  const episodes = podcastData?.results.slice(1);
+  const episodes = podcastData?.results.slice(1) || [];
 
-  const podcastDetailsKey = `podcastDetails-${id}`;
+  const podcastDetailsKey = getPodcastDetailsKey(id);
 
   useEffect(() => {
     return () => {
