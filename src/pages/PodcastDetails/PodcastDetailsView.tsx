@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAppSettings } from "../../contexts/AppSettings";
 import IPodcast from "../../models/IPodcast";
 import { Row, Col, Card, Divider, Space, Typography } from "antd";
+import '../../styles/podcastDetails.css';
 
 const { Text } = Typography;
 
@@ -20,8 +21,8 @@ const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPo
   return (
     <Row gutter={32}>
       <Col span={8}>
-        <Card style={{ marginRight: 48 }} loading={isLoading}>
-          <div style={{ padding: '0 24px' }}>
+        <Card className="podcast-details-card" loading={isLoading}>
+          <div className="podcast-details-img-container">
             <img className="clickable" width="100%" src={image} onClick={navigateToPodcast} />
           </div>
           <Divider />

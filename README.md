@@ -11,3 +11,5 @@ Build the application in production mode and serve it locally:
 npm run build
 npx serve dist
 ```
+
+*Notes: This was a technical challenge, so some requirements (technical, logic or design) where imposed.*

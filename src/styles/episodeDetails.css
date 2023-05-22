@@ -1,0 +1,12 @@
+.episode-details-title {
+  margin-top: 0;
+}
+
+div.episode-details-html-content {
+  font-style: italic;
+  margin-bottom: 48px;
+}
+
+audio.episode-details-audio {
+  width: 100%;
+}

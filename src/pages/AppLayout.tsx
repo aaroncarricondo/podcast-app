@@ -17,7 +17,7 @@ const AppLayout = () => {
   return (
     <Layout>
       <Header className="app-layout-header">
-        <Title className="clickable" level={3} color="blue" style={{ margin: 0, color: token.colorPrimary }} onClick={() => navigate('/')}>
+        <Title className="clickable app-layout-title" level={3} color="blue" style={{ color: token.colorPrimary }} onClick={() => navigate('/')}>
           Podcaster
         </Title>
         {isLoading && <Spin data-testid="loading-layout-spin" />}

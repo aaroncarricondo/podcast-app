@@ -4,6 +4,7 @@ import { ColumnsType } from "antd/lib/table";
 import { Button, Card, Table, Typography } from "antd";
 import { millisToMinutesAndSeconds } from "../../utils/timeUtils";
 import { useAppSettings } from "../../contexts/AppSettings";
+import '../../styles/podcastEpisodes.css';
 
 const { Title } = Typography;
 
@@ -33,10 +34,10 @@ const PodcastEpisodesView: React.FC<IPodcastEpisodesViewProps> = ({ trackCount, 
 
   return (
     <>
-      <Card style={{ marginBottom: 32 }} loading={isLoading}>
-        <Title level={2} style={{ margin: 0 }}>Episodes: {trackCount}</Title>
+      <Card className="podcast-episodes-card" loading={isLoading}>
+        <Title level={2} className="podcast-episodes-counter">Episodes: {trackCount}</Title>
       </Card>
-      <Card loading={isLoading}>
+      <Card className="podcast-episodes-card" loading={isLoading}>
         <Table
           rowKey="trackId"
           columns={columns}

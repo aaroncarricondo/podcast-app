@@ -1,6 +1,7 @@
 import { Badge, Input, Row } from "antd";
 import { ChangeEvent } from "react";
 import { useAppSettings } from "../../../contexts/AppSettings";
+import '../../../styles/podcastFilterer.css';
 
 interface IPodcastFiltererProps {
     badgeCount: number;
@@ -19,8 +20,8 @@ const PodcastFilterer: React.FC<IPodcastFiltererProps> = ({ badgeCount, onSearch
             {!isLoading && <Badge color="blue" count={badgeCount} overflowCount={999} />}
             <Input
                 data-testid="podcast-filterer-input"
+                className="podcast-filterer-input"
                 placeholder="Filter podcasts..."
-                style={{ maxWidth: '400px', marginLeft: 16 }}
                 onChange={onChange}
                 disabled={isLoading}
             />

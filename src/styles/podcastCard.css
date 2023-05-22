@@ -23,3 +23,8 @@
   height: 100%;
   display: block;
 }
+
+.ant-card.podcast-card .podcast-card-content-text {
+  width: 100%;
+  margin-top: 8px;
+}

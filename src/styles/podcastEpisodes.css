@@ -1,0 +1,7 @@
+.podcast-episodes-card:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.podcast-episodes-card .podcast-episodes-counter {
+  margin: 0;
+}

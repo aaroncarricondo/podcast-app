@@ -1,6 +1,7 @@
 import { Card, Typography } from "antd";
 import { useAppSettings } from "../../contexts/AppSettings";
 import IPodcastTrack from "../../models/IPodcastTrack";
+import '../../styles/episodeDetails.css';
 
 const { Title } = Typography;
 
@@ -14,9 +15,9 @@ const EpisodeDetailsView: React.FC<IEpisodeDetailsViewProps> = ({ episode }: IEp
 
   return (
     <Card loading={isLoading}>
-      <Title level={2} style={{ marginTop: 0 }}>{trackName}</Title>
-      <div dangerouslySetInnerHTML={{ __html: description }} style={{ fontStyle: 'italic', marginBottom: 48 }} />
-      <audio controls src={episodeUrl} style={{ width: '100%' }} />
+      <Title level={2} className="episode-details-title">{trackName}</Title>
+      <div className="episode-details-html-content" dangerouslySetInnerHTML={{ __html: description }} />
+      <audio className="episode-details-audio" controls src={episodeUrl} />
     </Card>
   );
 };

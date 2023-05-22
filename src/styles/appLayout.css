@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.app-layout-header > .app-layout-title {
+  margin: 0;
+}
+
 main.ant-layout-content {
   padding: 16px;
 }

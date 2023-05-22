@@ -20,7 +20,7 @@ const PodcastCard: React.FC<IPodcastCardProps> = ({ podcast }: IPodcastCardProps
       <div className="card-image">
         <img src={image} />
       </div>
-      <Space direction="vertical" style={{ width: '100%', marginTop: 8 }}>
+      <Space direction="vertical" className="podcast-card-content-text">
         <Text strong>{title?.toUpperCase()}</Text>
         <Text type="secondary">Author: {author}</Text>
       </Space>
