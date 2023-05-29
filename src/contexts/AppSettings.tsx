@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { ReactNode, createContext, useContext, useState } from 'react';
 
 interface AppSettingsData {
   isLoading: boolean;
@@ -17,7 +17,7 @@ const AppSettingsContext = createContext<AppSettingsData>(
 );
 
 interface AppSettingsProviderProps {
-  children: any;
+  children: ReactNode;
 }
 
 export const AppSettingsProvider = ({ children }: AppSettingsProviderProps) => {
@@ -31,13 +31,11 @@ export const AppSettingsProvider = ({ children }: AppSettingsProviderProps) => {
     setLoadingOperations((prev) => prev.filter((op) => op !== operationName));
   };
 
-  const value = useMemo(() => {
-    return {
-      isLoading: loadingOperations.length !== 0,
-      addOperation,
-      removeOperation,
-    }
-  }, [loadingOperations]);
+  const value = {
+    isLoading: loadingOperations.length !== 0,
+    addOperation,
+    removeOperation,
+  };
 
   return <AppSettingsContext.Provider value={value}>{children}</AppSettingsContext.Provider>;
 };
