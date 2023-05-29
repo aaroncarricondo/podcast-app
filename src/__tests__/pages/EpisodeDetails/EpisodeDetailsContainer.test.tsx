@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import * as usePodcastEpisodes from '../../../hooks/usePodcastEpisodes';
 import EpisodeDetailsContainer from '../../../pages/EpisodeDetails';
 import { mockedEpisode } from '../../data/podcastsEpisodesData';
+import { renderWithWrapper } from '../../mocks/test-utils';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as any,
@@ -23,7 +24,7 @@ jest.spyOn(usePodcastEpisodes, 'default')
 
 describe('Podcast details container', () => {
   it('should podcast details', () => {
-    render(<EpisodeDetailsContainer />);
+    renderWithWrapper(<EpisodeDetailsContainer />);
 
     expect(screen.queryByText(mockedEpisode.trackName)).toBeTruthy();
     expect(screen.queryByText(mockedEpisode.description)).toBeTruthy();

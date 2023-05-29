@@ -1,8 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import PodcastEpisodesView from "../../../pages/PodcastEpisodes/PodcastEpisodesView";
 import MockedMemoryRouter from "../../mocks/MemoryRouter";
 import { getMockedEpisodes, mockedEpisode } from '../../data/podcastsEpisodesData';
-
+import { renderWithWrapper } from '../../mocks/test-utils';
 
 describe('Podcast episodes view', () => {
   it('should navigate to episode details when title clicked', () => {
@@ -10,7 +10,7 @@ describe('Podcast episodes view', () => {
     const trackCount = 200;
     const testRouteText = 'Navigated';
 
-    render(
+    renderWithWrapper(
       <MockedMemoryRouter
         initialEntries={[`/podcast/1`]}
         mainRouteProps={{

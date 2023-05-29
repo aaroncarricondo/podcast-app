@@ -6,15 +6,7 @@ interface AppSettingsData {
   removeOperation: (operationName: string) => void;
 }
 
-const appSettingsDefaultValue: AppSettingsData = {
-  isLoading: false,
-  addOperation: () => undefined,
-  removeOperation: () => undefined,
-};
-
-const AppSettingsContext = createContext<AppSettingsData>(
-  appSettingsDefaultValue,
-);
+const AppSettingsContext = createContext<AppSettingsData>(undefined);
 
 interface AppSettingsProviderProps {
   children: ReactNode;

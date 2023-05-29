@@ -1,9 +1,9 @@
 import PageChunkLoader from '../../components/PageChunkLoader';
-import { render } from '@testing-library/react';
+import { renderWithWrapper } from '../mocks/test-utils';
 
 describe('Page chunk loader component', () => {
   it('should render a Spin', () => {
-    const { container } = render(<PageChunkLoader />);
+    const { container } = renderWithWrapper(<PageChunkLoader />);
 
     expect(container.querySelector('.ant-spin')).toBeTruthy();
   });

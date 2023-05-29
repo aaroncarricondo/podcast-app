@@ -14,6 +14,9 @@ const mockedAppSettingsReturn = (isLoading = false) => {
 };
 
 describe('App layout', () => {
+  jest.spyOn(AppSettings, 'useAppSettings')
+    .mockImplementation(() => mockedAppSettingsReturn(true));
+
   it('should render a header with application name', () => {
     render(<AppLayout />, { wrapper: BrowserRouter });
 
@@ -44,9 +47,6 @@ describe('App layout', () => {
   });
 
   it('should show a spinner if some loadingOperation is being performed', () => {
-    jest.spyOn(AppSettings, 'useAppSettings')
-      .mockImplementation(() => mockedAppSettingsReturn(true));
-
     render(<AppLayout />, { wrapper: BrowserRouter });
 
     expect(screen.getByTestId('loading-layout-spin')).toBeTruthy();

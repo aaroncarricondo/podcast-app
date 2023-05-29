@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-
+import { screen } from '@testing-library/react';
 import * as AppSettings from '../../../contexts/AppSettings';
 import TopPodcastsView from '../../../pages/TopPodcasts/TopPodcastsView';
+import { renderWithWrapper } from '../../mocks/test-utils';
 
 const mockedAppSettingsReturn = (isLoading = false) => {
   return {
@@ -21,7 +21,7 @@ describe('Top podcast view', () => {
         return mockedAppSettingsReturn(true);
       });
 
-    render(<TopPodcastsView podcasts={[]} onSearchChange={jest.fn()} />);
+    renderWithWrapper(<TopPodcastsView podcasts={[]} onSearchChange={jest.fn()} />);
 
     expect(screen.getAllByTestId('loading-podcast-card')).toHaveLength(8);
 

@@ -1,8 +1,7 @@
 
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { AppSettingsProvider, useAppSettings } from '../../contexts/AppSettings';
-
-const wrapper = ({ children }) => <AppSettingsProvider>{children}</AppSettingsProvider>
+import { useAppSettings } from '../../contexts/AppSettings';
+import { wrapper } from '../mocks/test-utils';
 
 describe('App settings context', () => {
   it('should be default not loading', async () => {
@@ -73,5 +72,10 @@ describe('App settings context', () => {
       const { isLoading } = result.current;
       expect(isLoading).toBeTruthy();
     });
+  });
+
+  it('should throw error when not wrapped inside `AppSettingsProvider`', () => {
+    expect(() => renderHook(() => useAppSettings()))
+      .toThrow(Error('useAppSettings must be used within the corresponding AppSettingsProvider'));
   });
 });

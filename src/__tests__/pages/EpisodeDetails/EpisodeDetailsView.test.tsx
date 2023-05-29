@@ -1,10 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import EpisodeDetailsView from '../../../pages/EpisodeDetails/EpisodeDetailsView';
 import { mockedEpisode } from '../../data/podcastsEpisodesData';
+import { renderWithWrapper } from '../../mocks/test-utils';
 
 describe('Episode details view', () => {
   it('should render episode details', () => {
-    const { container } = render(<EpisodeDetailsView episode={mockedEpisode} />);
+    const { container } = renderWithWrapper(<EpisodeDetailsView episode={mockedEpisode} />);
 
     expect(screen.queryByText(mockedEpisode.trackName)).toBeTruthy();
     expect(screen.queryByText(mockedEpisode.description)).toBeTruthy();
@@ -12,7 +13,7 @@ describe('Episode details view', () => {
   });
 
   it('should render episode details empty', () => {
-    const { container } = render(<EpisodeDetailsView episode={undefined} />);
+    const { container } = renderWithWrapper(<EpisodeDetailsView episode={undefined} />);
 
     expect(screen.queryByText(mockedEpisode.trackName)).toBeFalsy();
     expect(screen.queryByText(mockedEpisode.description)).toBeFalsy();

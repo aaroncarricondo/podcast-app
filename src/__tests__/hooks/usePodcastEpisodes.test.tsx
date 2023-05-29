@@ -4,6 +4,7 @@ import { getMockedEpisodes } from '../data/podcastsEpisodesData';
 import { setStoredData } from '../../utils/storedDataUtils';
 import IRawPodcastData from '../../models/IRawPodcastData';
 import { getMockedFetch } from '../mocks/fetch';
+import { wrapper } from '../mocks/test-utils';
 
 const id = '0';
 
@@ -25,9 +26,8 @@ describe('usePodcastEpisodes hook', () => {
 
   it('should return the data when called and return ', async () => {
     jest.spyOn(window, 'fetch').mockImplementation(mockedFetch);
-    const { result } = renderHook(() => usePodcastEpisodes(id));
+    const { result } = renderHook(() => usePodcastEpisodes(id), { wrapper });
 
-    // Assert
     await waitFor(() => {
       const { episodes } = result.current;
       expect(episodes).toHaveLength(mockedEpisodes.length - 1);
@@ -40,9 +40,8 @@ describe('usePodcastEpisodes hook', () => {
 
     setStoredData(getPodcastDetailsKey(id), rawPodcastData);
 
-    const { result } = renderHook(() => usePodcastEpisodes(id));
+    const { result } = renderHook(() => usePodcastEpisodes(id), { wrapper });
 
-    // Assert
     await waitFor(() => {
       const { episodes } = result.current;
       expect(episodes).toHaveLength(mockedEpisodes.length - 1);
