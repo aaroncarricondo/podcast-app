@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppSettings } from "../contexts/AppSettings";
 import IRawPodcastData from "../models/IRawPodcastData";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
+import { lookupApiFetch } from "../services/apiServices";
 
 export const getPodcastDetailsKey = (id: string) => `podcastDetails-${id}`;
 
@@ -31,8 +32,7 @@ const usePodcastEpisodes = (id: string) => {
   const fetchPodcasts = async () => {
     addOperation(podcastDetailsKey);
     try {
-      const url = `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`;
-      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const response = await lookupApiFetch({ method: 'GET' }, `?id=${id}&media=podcast&entity=podcastEpisode&limit=20`);
       const data = await response.json();
 
       const parsedData = JSON.parse(data.contents);

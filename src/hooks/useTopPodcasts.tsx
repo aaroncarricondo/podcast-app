@@ -3,6 +3,7 @@ import IPodcast from "../models/IPodcast";
 import IRawPodcast from "../models/IRawPodcast";
 import { useAppSettings } from "../contexts/AppSettings";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
+import { topPodcastsApiFetch } from "../services/apiServices";
 
 export const topPodcastsKey = 'topPodcasts';
 
@@ -24,8 +25,9 @@ const useTopPodcasts = () => {
   const fetchPodcasts = async () => {
     addOperation(topPodcastsKey);
     try {
-      const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
-      const { feed: { entry } }: { feed: { entry: IRawPodcast[] } } = await response.json();
+      const response = await topPodcastsApiFetch({ method: 'GET' }, '/limit=100/genre=1310/json');
+      const data = await response.json();
+      const { feed: { entry } }: { feed: { entry: IRawPodcast[] } } = JSON.parse(data.contents);
 
       const parsedPodcasts: IPodcast[] = entry.map((e) => {
         return {
