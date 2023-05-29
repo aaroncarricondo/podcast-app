@@ -7,9 +7,11 @@ import { getMockedFetch } from '../mocks/fetch';
 const mockedRawPodcasts = getMockedRawPodcasts();
 const mockedFetch = getMockedFetch({
   json: () => Promise.resolve({
-    feed: {
-      entry: mockedRawPodcasts,
-    }
+    contents: JSON.stringify({
+      feed: {
+        entry: mockedRawPodcasts,
+      }
+    }),
   }),
 }) as any;
 
