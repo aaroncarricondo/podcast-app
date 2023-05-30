@@ -75,7 +75,11 @@ describe('App settings context', () => {
   });
 
   it('should throw error when not wrapped inside `AppSettingsProvider`', () => {
+    // Hide error that is being tested
+    const mockedConsoleError = jest.fn();
+    jest.spyOn(console, 'error').mockImplementation(mockedConsoleError);
+
     expect(() => renderHook(() => useAppSettings()))
-      .toThrow(Error('useAppSettings must be used within the corresponding AppSettingsProvider'));
+      .toThrowError('useAppSettings must be used within the corresponding AppSettingsProvider');
   });
 });
