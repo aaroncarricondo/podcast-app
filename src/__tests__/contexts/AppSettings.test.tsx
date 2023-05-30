@@ -1,18 +1,18 @@
 
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { useAppSettings } from '../../contexts/AppSettings';
-import { wrapper } from '../mocks/test-utils';
+import { renderHookWithWrapper } from '../mocks/contexts/appSettings-utils';
 
 describe('App settings context', () => {
   it('should be default not loading', async () => {
-    const { result } = renderHook(() => useAppSettings(), { wrapper });
+    const { result } = renderHookWithWrapper(() => useAppSettings());
 
     const { isLoading } = result.current;
     expect(isLoading).toBeFalsy();
   });
 
   it('should return loading if an operation is added', async () => {
-    const { result } = renderHook(() => useAppSettings(), { wrapper });
+    const { result } = renderHookWithWrapper(() => useAppSettings());
 
     act(() => {
       const { addOperation } = result.current;
@@ -26,7 +26,7 @@ describe('App settings context', () => {
   });
 
   it('should return not loading if an operation is added and then removed', async () => {
-    const { result } = renderHook(() => useAppSettings(), { wrapper });
+    const { result } = renderHookWithWrapper(() => useAppSettings());
 
     act(() => {
       const { addOperation } = result.current;
@@ -50,7 +50,7 @@ describe('App settings context', () => {
   });
 
   it('should still return loading if two operation are added and one is removed', async () => {
-    const { result } = renderHook(() => useAppSettings(), { wrapper });
+    const { result } = renderHookWithWrapper(() => useAppSettings());
 
     act(() => {
       const { addOperation } = result.current;

@@ -1,6 +1,5 @@
 import { MemoryRouter, Route, Routes, RouteProps } from 'react-router-dom';
 import { InitialEntry } from '@remix-run/router';
-import { ReactNode } from 'react';
 
 interface IMemoryRouterProps {
   initialEntries?: InitialEntry[];

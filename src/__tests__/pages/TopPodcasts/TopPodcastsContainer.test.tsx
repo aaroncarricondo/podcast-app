@@ -4,7 +4,7 @@ import * as useTopPodcasts from '../../../hooks/useTopPodcasts';
 import TopPodcasts from '../../../pages/TopPodcasts';
 import { getMockedPodcasts } from '../../data/podcastsData';
 import { BrowserRouter } from 'react-router-dom';
-import * as AppSettings from '../../../contexts/AppSettings';
+import { spyOnAppSettings } from '../../mocks/contexts/appSettings-utils';
 
 const topPodcasts = getMockedPodcasts(10, true);
 const { length } = topPodcasts;
@@ -14,17 +14,8 @@ jest.spyOn(useTopPodcasts, 'default')
     getPodcastById: jest.fn(),
   }));
 
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
-
 describe('Top podcast container', () => {
-  jest.spyOn(AppSettings, 'useAppSettings')
-    .mockImplementation(() => mockedAppSettingsReturn(false));
+  spyOnAppSettings(false);
 
   it('should render the top podcasts with its basic information', () => {
     render(<TopPodcasts />, { wrapper: BrowserRouter });

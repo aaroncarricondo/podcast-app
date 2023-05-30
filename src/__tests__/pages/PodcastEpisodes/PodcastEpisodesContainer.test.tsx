@@ -3,7 +3,7 @@ import PodcastEpisodes from '../../../pages/PodcastEpisodes';
 import * as usePodcastEpisodes from '../../../hooks/usePodcastEpisodes';
 import { BrowserRouter } from 'react-router-dom';
 import { getMockedEpisodes, mockedEpisode } from '../../data/podcastsEpisodesData';
-import * as AppSettings from '../../../contexts/AppSettings';
+import { spyOnAppSettings } from '../../mocks/contexts/appSettings-utils';
 
 const trackCount = 200;
 const episodes = getMockedEpisodes();
@@ -14,17 +14,8 @@ jest.spyOn(usePodcastEpisodes, 'default')
     getEpisodeById: jest.fn(),
   }));
 
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
-
 describe('Podcast episodes container', () => {
-  jest.spyOn(AppSettings, 'useAppSettings')
-    .mockImplementation(() => mockedAppSettingsReturn(false));
+  spyOnAppSettings(false);
 
   it('should render podcast episodes', () => {
     render(<PodcastEpisodes />, { wrapper: BrowserRouter });

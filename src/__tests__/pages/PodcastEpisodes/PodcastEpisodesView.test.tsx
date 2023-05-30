@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import PodcastEpisodesView from "../../../pages/PodcastEpisodes/PodcastEpisodesView";
 import MockedMemoryRouter from "../../mocks/MemoryRouter";
 import { getMockedEpisodes, mockedEpisode } from '../../data/podcastsEpisodesData';
-import { renderWithWrapper } from '../../mocks/test-utils';
+import { renderWithWrapper } from '../../mocks/contexts/appSettings-utils';
 
 describe('Podcast episodes view', () => {
   it('should navigate to episode details when title clicked', () => {

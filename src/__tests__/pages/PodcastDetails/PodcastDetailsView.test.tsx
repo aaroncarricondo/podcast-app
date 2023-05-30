@@ -1,20 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import PodcastDetailsView from '../../../pages/PodcastDetails/PodcastDetailsView';
-import * as AppSettings from '../../../contexts/AppSettings';
 import { BrowserRouter } from 'react-router-dom';
 import MockedMemoryRouter from '../../mocks/MemoryRouter';
 import { mockedPodcast } from '../../data/podcastsData';
+import { spyOnAppSettings } from '../../mocks/contexts/appSettings-utils';
 
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
-
-jest.spyOn(AppSettings, 'useAppSettings')
-  .mockImplementation(() => mockedAppSettingsReturn());
+spyOnAppSettings();
 
 describe('Podcast details view', () => {
   it('should render podcast details empty', () => {

@@ -1,21 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
 import AppLayout from '../../pages/AppLayout';
 import { BrowserRouter } from 'react-router-dom';
 import MockedMemoryRouter from '../mocks/MemoryRouter';
-import * as AppSettings from '../../contexts/AppSettings';
-
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
+import { spyOnAppSettings } from '../mocks/contexts/appSettings-utils';
 
 describe('App layout', () => {
-  jest.spyOn(AppSettings, 'useAppSettings')
-    .mockImplementation(() => mockedAppSettingsReturn(true));
+  spyOnAppSettings(true);
 
   it('should render a header with application name', () => {
     render(<AppLayout />, { wrapper: BrowserRouter });

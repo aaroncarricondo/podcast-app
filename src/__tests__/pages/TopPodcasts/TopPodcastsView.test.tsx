@@ -1,26 +1,10 @@
 import { screen } from '@testing-library/react';
-import * as AppSettings from '../../../contexts/AppSettings';
 import TopPodcastsView from '../../../pages/TopPodcasts/TopPodcastsView';
-import { renderWithWrapper } from '../../mocks/test-utils';
-
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
-
-jest.spyOn(AppSettings, 'useAppSettings')
-  .mockImplementation(() => mockedAppSettingsReturn(true));
+import { renderWithWrapper, spyOnAppSettings } from '../../mocks/contexts/appSettings-utils';
 
 describe('Top podcast view', () => {
   it('should render cards with skeleton while loading', () => {
-    jest.spyOn(AppSettings, 'useAppSettings')
-      .mockImplementation(() => {
-        return mockedAppSettingsReturn(true);
-      });
-
+    spyOnAppSettings(true);
     renderWithWrapper(<TopPodcastsView podcasts={[]} onSearchChange={jest.fn()} />);
 
     expect(screen.getAllByTestId('loading-podcast-card')).toHaveLength(8);

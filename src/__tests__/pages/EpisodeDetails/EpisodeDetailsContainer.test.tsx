@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import * as usePodcastEpisodes from '../../../hooks/usePodcastEpisodes';
 import EpisodeDetailsContainer from '../../../pages/EpisodeDetails';
 import { mockedEpisode } from '../../data/podcastsEpisodesData';
-import { renderWithWrapper } from '../../mocks/test-utils';
+import { renderWithWrapper } from '../../mocks/contexts/appSettings-utils';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as any,

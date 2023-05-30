@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import EpisodeDetailsView from '../../../pages/EpisodeDetails/EpisodeDetailsView';
 import { mockedEpisode } from '../../data/podcastsEpisodesData';
-import { renderWithWrapper } from '../../mocks/test-utils';
+import { renderWithWrapper } from '../../mocks/contexts/appSettings-utils';
 
 describe('Episode details view', () => {
   it('should render episode details', () => {

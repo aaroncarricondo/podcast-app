@@ -1,5 +1,5 @@
 import PageChunkLoader from '../../components/PageChunkLoader';
-import { renderWithWrapper } from '../mocks/test-utils';
+import { renderWithWrapper } from '../mocks/contexts/appSettings-utils';
 
 describe('Page chunk loader component', () => {
   it('should render a Spin', () => {

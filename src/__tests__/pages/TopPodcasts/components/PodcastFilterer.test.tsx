@@ -1,18 +1,8 @@
 import { render, screen } from '@testing-library/react';
-
-import * as AppSettings from '../../../../contexts/AppSettings';
 import PodcastFilterer from '../../../../pages/TopPodcasts/components/PodcastFilterer';
+import { spyOnAppSettings } from '../../../mocks/contexts/appSettings-utils';
 
-const mockedAppSettingsReturn = (isLoading = false) => {
-  return {
-    removeOperation: jest.fn(),
-    addOperation: jest.fn(),
-    isLoading,
-  };
-};
-
-jest.spyOn(AppSettings, 'useAppSettings')
-  .mockImplementation(() => mockedAppSettingsReturn(true));
+spyOnAppSettings(true);
 
 describe('Podcast filterer', () => {
   const badgeCount = 100;
