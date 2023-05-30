@@ -13,6 +13,9 @@ const mockedFetch = getMockedFetch({
         entry: mockedRawPodcasts,
       }
     }),
+    status: {
+      'http_code': '200',
+    },
   }),
 }) as any;
 

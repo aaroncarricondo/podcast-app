@@ -80,7 +80,7 @@ describe('App settings context', () => {
     jest.spyOn(console, 'error').mockImplementation(mockedConsoleError);
 
     expect(() => renderHook(() => useAppSettings()))
-      .toThrowError('useAppSettings must be used within the corresponding AppSettingsProvider');
+      .toThrow('useAppSettings must be used within the corresponding AppSettingsProvider');
     expect(mockedConsoleError).toBeCalled();
   });
 });

@@ -1,4 +1,4 @@
-interface IAllowOriginsReponse<T = any> {
+export interface IAllowOriginsResponse<T = any> {
   contents: T;
   status: {
     url: string;
@@ -9,7 +9,8 @@ interface IAllowOriginsReponse<T = any> {
   }
 }
 
-export const checkHttpCode = (allowOriginsReponse: IAllowOriginsReponse) => {
+// Notes: Only 200 is considered as OK status because its the real case in this application.
+export const checkHttpCode = (allowOriginsReponse: IAllowOriginsResponse) => {
   const { contents, status } = allowOriginsReponse;
 
   const httpCode = status['http_code'];

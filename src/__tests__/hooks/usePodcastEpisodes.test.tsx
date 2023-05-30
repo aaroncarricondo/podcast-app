@@ -16,6 +16,9 @@ const rawPodcastData: IRawPodcastData = {
 const mockedFetch = getMockedFetch({
   json: () => Promise.resolve({
     contents: JSON.stringify(rawPodcastData),
+    status: {
+      'http_code': '200',
+    },
   }),
 }) as any;
 
