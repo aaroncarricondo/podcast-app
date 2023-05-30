@@ -1,8 +1,9 @@
 {
   "name": "podcast-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "iTunes top podcast application, consuming the public API.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "webpack --mode=production ",
     "build-dev": "webpack --mode=development",
@@ -15,8 +16,14 @@
     "type": "git",
     "url": "git+https://github.com/aaroni34/podcast-app.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "react-router-dom",
+    "typescript",
+    "ant-design",
+    "jest"
+  ],
+  "author": "Aaron Carricondo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aaroni34/podcast-app/issues"

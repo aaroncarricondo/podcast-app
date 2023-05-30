@@ -3,6 +3,7 @@ import { useAppSettings } from "../contexts/AppSettings";
 import IRawPodcastData from "../models/IRawPodcastData";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 import { lookupApiFetch } from "../services/apiServices";
+import { checkHttpCode } from "../utils/allowOriginsUtils";
 
 export const getPodcastDetailsKey = (id: string) => `podcastDetails-${id}`;
 
@@ -34,6 +35,7 @@ const usePodcastEpisodes = (id: string) => {
     try {
       const response = await lookupApiFetch({ method: 'GET' }, `?id=${id}&media=podcast&entity=podcastEpisode&limit=20`);
       const data = await response.json();
+      checkHttpCode(data);
 
       const parsedData = JSON.parse(data.contents);
       setPodcastData(parsedData);

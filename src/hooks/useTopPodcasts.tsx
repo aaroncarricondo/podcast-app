@@ -4,6 +4,7 @@ import IRawPodcast from "../models/IRawPodcast";
 import { useAppSettings } from "../contexts/AppSettings";
 import { getStoredData, setStoredData } from "../utils/storedDataUtils";
 import { topPodcastsApiFetch } from "../services/apiServices";
+import { checkHttpCode } from "../utils/allowOriginsUtils";
 
 export const topPodcastsKey = 'topPodcasts';
 
@@ -27,6 +28,8 @@ const useTopPodcasts = () => {
     try {
       const response = await topPodcastsApiFetch({ method: 'GET' }, '/limit=100/genre=1310/json');
       const data = await response.json();
+      checkHttpCode(data);
+
       const { feed: { entry } }: { feed: { entry: IRawPodcast[] } } = JSON.parse(data.contents);
 
       const parsedPodcasts: IPodcast[] = entry.map((e) => {
