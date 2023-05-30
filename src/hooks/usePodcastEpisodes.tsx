@@ -45,7 +45,7 @@ const usePodcastEpisodes = (id: string) => {
     }
   };
 
-  const getEpisodeById = (id: string) => episodes?.find((episode) => episode.trackId === +id);
+  const getEpisodeById = (id: string) => episodes.find((episode) => episode.trackId === +id);
 
   return { trackCount, episodes, getEpisodeById };
 };

@@ -81,5 +81,6 @@ describe('App settings context', () => {
 
     expect(() => renderHook(() => useAppSettings()))
       .toThrowError('useAppSettings must be used within the corresponding AppSettingsProvider');
+    expect(mockedConsoleError).toBeCalled();
   });
 });

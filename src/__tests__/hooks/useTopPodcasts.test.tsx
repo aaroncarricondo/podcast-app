@@ -19,6 +19,7 @@ const mockedFetch = getMockedFetch({
 describe('useTopPodcast hook', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    localStorage.clear();
   });
 
   it('should return the data when called and return ', async () => {
@@ -42,6 +43,21 @@ describe('useTopPodcast hook', () => {
       const { topPodcasts } = result.current;
       expect(topPodcasts).toHaveLength(mockedRawPodcasts.length);
       expect(mockedFetch).not.toBeCalled();
+    });
+  });
+
+  it('should log an error if fetch fails', async () => {
+    const mockedErrorFetch = jest.fn(() => Promise.reject());
+    jest.spyOn(window, 'fetch').mockImplementation(mockedErrorFetch);
+
+    const mockedConsoleError = jest.fn();
+    jest.spyOn(console, 'error').mockImplementation(mockedConsoleError);
+
+    renderHookWithWrapper(() => useTopPodcasts());
+
+    await waitFor(() => {
+      expect(mockedErrorFetch).toBeCalled();
+      expect(mockedConsoleError).toBeCalled();
     });
   });
 });
