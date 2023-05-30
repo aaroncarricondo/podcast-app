@@ -1,8 +1,9 @@
-import { IAllowOriginsResponse, checkHttpCode } from "../../utils/allowOriginsUtils";
+import { IAllowOriginsResponseJson } from "../../services/apiServices";
+import { checkHttpCode } from "../../utils/allowOriginsUtils";
 
 describe('Check http code to allowOrigins service', () => {
   it('should throw an Error if status is not 200', () => {
-    const allowOriginsResponse: IAllowOriginsResponse = {
+    const allowOriginsResponse: IAllowOriginsResponseJson = {
       contents: 'Contents',
       status: {
         url: 'http://www.sampleUrl.com',

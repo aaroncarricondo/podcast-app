@@ -1,12 +1,40 @@
-// TODO: Type defined for a custom hook that uses fetch library.
-export type FetchFunction = (options: RequestInit, urlSuffix?: string) => Promise<Response>;
-
 // This constant value should be taken from .env file
 const baseUrl = 'https://itunes.apple.com/';
 
-const getAllowOriginUrl = (url: string) => {
-  return `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+// Generic allowOrigins api fetch
+export interface IAllowOriginsResponseJson {
+  contents: string;
+  status: {
+    url: string;
+    'http_code': string;
+    'content_type': string;
+    'response_time': string;
+    'content_length': string;
+  }
+}
+
+interface IAllowOriginsResponse extends Response {
+  json(): Promise<IAllowOriginsResponseJson>;
 };
+
+export const apiFetch = (options: RequestInit, urlPrefix: string, urlSuffix: string = ''): Promise<IAllowOriginsResponse> => {
+  const url = `${baseUrl}${urlPrefix}${urlSuffix}`;
+  const allowOriginsUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+
+  return fetch(allowOriginsUrl, 
+    { 
+      mode: "cors",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      ...options,
+    });
+}
+
+
+
+// Specific implementations
+export type FetchFunction = (options: RequestInit, urlSuffix?: string) => Promise<IAllowOriginsResponse>;
 
 export const lookupApiFetch: FetchFunction = (options: RequestInit, urlSuffix: string = '') => {
   const urlPrefix = 'lookup';
@@ -19,16 +47,3 @@ export const topPodcastsApiFetch: FetchFunction = (options: RequestInit, urlSuff
 
   return apiFetch(options, urlPrefix, urlSuffix);
 };
-
-export const apiFetch = (options: RequestInit, urlPrefix: string, urlSuffix: string = '') => {
-  const url = `${baseUrl}${urlPrefix}${urlSuffix}`;
-
-  return fetch(getAllowOriginUrl(url), 
-    { 
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      ...options,
-    });
-}
