@@ -6,10 +6,10 @@ export interface IAllowOriginsResponseJson {
   contents: string;
   status: {
     url: string;
-    'http_code': string;
+    'http_code': number;
     'content_type': string;
-    'response_time': string;
-    'content_length': string;
+    'response_time': number;
+    'content_length': number;
   }
 }
 
