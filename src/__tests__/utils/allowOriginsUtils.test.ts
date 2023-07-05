@@ -7,10 +7,10 @@ describe('Check http code to allowOrigins service', () => {
       contents: 'Contents',
       status: {
         url: 'http://www.sampleUrl.com',
-        'http_code': '500',
+        'http_code': 500,
         'content_type': 'text/javascript; charset=utf-8',
-        'response_time': '1000',
-        'content_length': '7',
+        'response_time': 1000,
+        'content_length': 7,
       },
     };
 

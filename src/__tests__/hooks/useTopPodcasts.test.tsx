@@ -14,7 +14,7 @@ const mockedFetch = getMockedFetch({
       }
     }),
     status: {
-      'http_code': '200',
+      'http_code': 200,
     },
   }),
 }) as any;
