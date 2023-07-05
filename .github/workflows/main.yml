@@ -1,4 +1,4 @@
-name: Code coverage
+name: Code coverage and deploy
 
 on:
   push:
@@ -15,17 +15,28 @@ jobs:
         node-version: [18.x]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Test
-      run: |
-        npm install
-        npm run coverage
-    
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+      - name: Test
+        run: |
+          yarn install
+          yarn coverage
+      
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+
+      - name: Yarn build
+        run: yarn build
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PODCASTER_ITUNES }}'
+          channelId: live
+          projectId: podcaster-itunes
