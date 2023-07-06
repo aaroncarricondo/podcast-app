@@ -10,6 +10,8 @@ interface ITopPodcastsViewProps {
   onSearchChange: (keyword: string) => void;
 };
 
+const columnBreakpoints = { xs: 24, sm: 12, md: 6, xxl: 4 };
+
 const TopPodcastsView: React.FC<ITopPodcastsViewProps> = ({ podcasts, onSearchChange }) => {
   const badgeCount = podcasts?.length ?? 0;
   const { isLoading } = useAppSettings();
@@ -23,7 +25,7 @@ const TopPodcastsView: React.FC<ITopPodcastsViewProps> = ({ podcasts, onSearchCh
             <>
               {[...Array(8).keys()].map((value) => {
                 return (
-                  <Col key={value} span={6}>
+                  <Col key={value} {...columnBreakpoints}>
                     <Card data-testid="loading-podcast-card" loading />
                   </Col>
                 );
@@ -34,7 +36,7 @@ const TopPodcastsView: React.FC<ITopPodcastsViewProps> = ({ podcasts, onSearchCh
             <>
               {podcasts?.map((podcast) => {
                 return (
-                  <Col key={podcast.id} span={6}>
+                  <Col key={podcast.id} {...columnBreakpoints}>
                     <PodcastCard podcast={podcast} />
                   </Col>
                 );

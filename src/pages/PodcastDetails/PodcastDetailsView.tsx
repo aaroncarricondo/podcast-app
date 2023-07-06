@@ -10,6 +10,9 @@ interface IPodcastDetailsViewProps {
   podcast: IPodcast;
 }
 
+const detailsColumnBreakpoints = { xs: 24, sm: 24, md: 8 };
+const episodesColumnBreakpoints = { xs: 24, sm: 24, md: 16 };
+
 const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPodcastDetailsViewProps) => {
   const { isLoading } = useAppSettings();
   const navigate = useNavigate();
@@ -19,8 +22,8 @@ const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPo
   const navigateToPodcast = () => navigate(`/podcast/${id}`);
 
   return (
-    <Row gutter={32}>
-      <Col span={8}>
+    <Row gutter={[32, 32]}>
+      <Col {...detailsColumnBreakpoints}>
         <Card className="podcast-details-card" loading={isLoading}>
           <div className="podcast-details-img-container">
             <img className="clickable" width="100%" src={image} onClick={navigateToPodcast} />
@@ -28,7 +31,7 @@ const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPo
           <Divider />
           <Space direction="vertical" size={0}>
             <Text className="clickable" strong onClick={navigateToPodcast}>{title}</Text>
-            <Text className="clickable" italic onClick={navigateToPodcast}>by {author}</Text>
+            <Text italic>by {author}</Text>
           </Space>
           <Divider />
           <Text strong>Description:</Text>
@@ -36,7 +39,7 @@ const PodcastDetailsView: React.FC<IPodcastDetailsViewProps> = ({ podcast }: IPo
           <Text italic>{summary}</Text>
         </Card>
       </Col>
-      <Col span={16}>
+      <Col {...episodesColumnBreakpoints}>
         <Outlet />
       </Col>
     </Row>
